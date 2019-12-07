@@ -342,7 +342,7 @@ function arr(arr) {
     return resArr;
 }
 
-console.log(arr([2, 7, 5]))
+// console.log(arr([2, 7, 5]))
 
 /*
 Find max num in arr
@@ -457,7 +457,7 @@ tree.insert(13)
 tree.insert(-3)
 tree.insert(15)
 tree.insert(11.5)
-console.log(tree.find(2))
+// console.log(tree.find(2))
 
 // tree.root = new Node(10)
 // tree.root.right = new Node(15)
@@ -522,7 +522,7 @@ function trapWater(arr) {
 
     return Math.abs(counter)
 }
-//                                       
+
 // console.log(trapWater([1, 2, 4, 7, 3, 2, 4]))
 
 
@@ -556,6 +556,142 @@ var threeSum = function (nums) {
 };
 
 // console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+
+
+/*
+Roman numerals
+*/
+var intToRoman = function (num) {
+
+    var roman = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+    };
+    var str = '';
+
+
+    for (let i in roman) {
+        console.log('num:', num, '|', 'roman:', roman[i])
+        let remaining = Math.floor(num / roman[i])
+        console.log('remaining:', remaining)
+        num -= remaining * roman[i]
+        console.log('num:', num)
+        str += i.repeat(remaining)
+        console.log('str:', str)
+        console.log('----------------------------------------------')
+    }
+
+    return str;
+};
+
+// console.log(intToRoman(27))
+
+
+
+
+/**
+ * add array and num
+ */
+
+var addToArrayForm = function (A, K) {
+
+    let revA = A.reverse()
+    let revK = K.toString().split('').reverse()
+
+    for (let i = 0; i < revA.length; i++) {
+        let carry = 0;
+        if (revK[i]) {
+            let sum = revA[i] + Number(revK[i])
+            if (sum - 10 >= 0) {
+                carry = 1
+            }
+            revA[i] += carry + (sum - 10)
+        } else {
+            revA[i] = carry + revA[i]
+        }
+    }
+};
+
+// console.log(addToArrayForm([1, 2, 6, 3, 0, 7, 1, 7, 1, 9, 7, 5, 6, 6, 4, 4, 0, 0, 6, 3], 516))
+console.log(addToArrayForm([9, 9, 9, 9], 1))
+
+
+
+
+
+/*
+
+Transpose a square..... flip a square
+*/
+
+var transpose = function (A) {
+    let result = []
+    let i = 0
+    while (i !== A[0].length) {
+        let temp = []
+        for (let j = 0; j < A.length; j++) {
+
+            temp.push(A[j][i])
+        }
+        result.push(temp)
+        i++
+    }
+    return result
+};
+
+
+/*
+Backspace String Compare
+*/
+
+var backspaceCompare = function (S, T) {
+    if (S === "" && T === "") return true;
+    let s = S.split("")
+    let t = T.split("")
+    let i = 0;
+
+    while (S[i] || T[i]) {
+
+        while (s[i] === "#") {
+            if (i === 0) {
+                s.splice(i, 1)
+            } else {
+                s.splice(i, 1)
+                s.splice(i - 1, 1)
+                i = 0
+            }
+        }
+
+        while (t[i] === "#") {
+            if (i === 0) {
+                t.splice(i, 1)
+            } else {
+                t.splice(i, 1)
+                t.splice(i - 1, 1)
+                i = 0
+            }
+        }
+        i++;
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] !== t[i]) {
+            return false
+        }
+    }
+    return true;
+};
 
 /*
 Find how many rectangles are possible
