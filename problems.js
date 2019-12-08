@@ -236,7 +236,6 @@ function findBadWords(str) {
  Ex: [2,2,3,4,5,6,7,7,7,3,2,9]
  NO SORT()
 */
-
 function sortNums(arr) {
     let numbers = {};
     let sortedNumbers = [];
