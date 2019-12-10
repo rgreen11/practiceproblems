@@ -692,6 +692,53 @@ var backspaceCompare = function (S, T) {
     return true;
 };
 
+
+/*
+build a game called hot and cold
+*/
+
+function hotCold() {
+    var x = Math.round(Math.random(1, 101) * 100);
+    var input = '';
+    var queue = [];
+
+
+    do {
+        input = prompt('What is your guess?');
+        var diff = Math.abs(parseInt(input) - x);
+        var isIncorrect = true;
+        if (diff > 30) {
+            console.log('Cold')
+        } else if (diff >= 20) {
+            console.log('Warm')
+        } else if (diff >= 10) {
+            console.log('Hot')
+        } else if (diff >= 5) {
+            console.log('Burning');
+        } else if (diff > 0) {
+            console.log('On fire!');
+        } else {
+            console.log('You got it!');
+            var wrongGuesses = '';
+            for (var i = 0; i < queue.length; i++) {
+                if (i == queue.length - 1) {
+                    wrongGuesses += queue[i];
+                } else {
+                    wrongGuesses += queue[i] + ', ';
+                }
+            }
+            console.log('Wrong Guesses: ' + wrongGuesses);
+            isIncorrect = false;
+            break;
+        }
+        if (queue.length >= 5) {
+            queue.splice(0, 1);
+        }
+        queue.push(parseInt(input));
+    } while (isIncorrect);
+} ```
+  
+
 /*
 Find how many rectangles are possible
 */
