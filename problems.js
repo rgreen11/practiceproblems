@@ -35,7 +35,7 @@ function reverseStr3(str) {
 
     return copyStr.join('');
 }
-// console.log(reverseStr3('HCIR'))
+console.log(reverseStr3('HCIR'))
 
 
 
@@ -279,7 +279,7 @@ const removeLetter = (str) => {
     return cpStr.join('')
 }
 
-// console.log(removeLetter('#abc!d##mwkwnj#'))
+console.log(removeLetter('#abc!d##mwkwnj#'))
 
 // how many steps are in a cycle
 
@@ -623,7 +623,7 @@ var addToArrayForm = function (A, K) {
 };
 
 // console.log(addToArrayForm([1, 2, 6, 3, 0, 7, 1, 7, 1, 9, 7, 5, 6, 6, 4, 4, 0, 0, 6, 3], 516))
-console.log(addToArrayForm([9, 9, 9, 9], 1))
+// console.log(addToArrayForm([9, 9, 9, 9], 1))
 
 
 
@@ -702,7 +702,6 @@ function hotCold() {
     var input = '';
     var queue = [];
 
-
     do {
         input = prompt('What is your guess?');
         var diff = Math.abs(parseInt(input) - x);
@@ -736,12 +735,87 @@ function hotCold() {
         }
         queue.push(parseInt(input));
     } while (isIncorrect);
-} ```
-  
+}
+
+class HotCold {
+    constructor() {
+        this.last5Nums = [];
+        this.randomNumber;
+    }
+
+    start() {
+        this.randomNumber = Math.round(Math.random() * 100)
+        console.log('Number has been created!')
+    }
+
+    guessNumber(input) {
+        console.log(this.randomNumber)
+        if (input === this.randomNumber) console.log('Winner', this.last5Nums)
+        const diff = Math.abs(input - this.randomNumber);
+        if (diff >= 30) {
+            this.handleLast5Nums()
+            console.log('You are freezing')
+        } else if (diff >= 20) {
+            this.handleLast5Nums()
+            console.log('WARM')
+        } else if (diff >= 10) {
+            this.handleLast5Nums()
+            console.log('HOT')
+        } else if (diff >= 5) {
+            this.handleLast5Nums()
+            console.log('ON FIRE')
+        }
+    }
+
+    handleLast5Nums() {
+        if (this.last5Nums.length > 5) {
+            this.last5Nums.shift()
+            return this.last5Nums
+        } else if (this.input) {
+            this.last5Nums.push(this.input)
+            return this.last5Nums
+        }
+
+    }
+
+}
+
+const HotColdGame = new HotCold
+HotColdGame.start() // In order to start the game I would have to invoke the start function on a seperate page 
+// If the function is envoked on the same page as guess number the random number would rest. [ERROR]
+HotColdGame.guessNumber(5)
+HotColdGame.guessNumber(11)
+
+
+
+
+// Group Anagrams
+
+var groupAnagrams = function (strs) {
+
+    let anagram = {};
+
+    for (let word of strs) {
+        let a = word.split('').sort().join('')
+        if (!anagram[a]) {
+            anagram[a] = [word]
+        } else {
+            anagram[a].push(word)
+        }
+
+    }
+
+    return Object.values(anagram)
+
+};
+
 
 /*
 Find how many rectangles are possible
 */
+
+
+
 
 
 
