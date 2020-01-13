@@ -810,11 +810,71 @@ var groupAnagrams = function (strs) {
 };
 
 
+// Find the minimum element in a sorted and rotated array
+
+function findMin(a) {
+    let start = 0;
+    let end = a.length - 1
+    let mp = Math.floor((start + end) / 2)
+
+    while (true) {
+        if (a[mp] < a[mp + 1] && a[mp] < a[mp - 1]) {
+            return mp;
+        } else if (a[mp] < a[mp + 1] && a[mp] > a[mp - 1]) {
+            end = mp - 1
+            mp = Math.floor((start + end) / 2)
+        } else if (a[mp] > a[mp + 1] && a[mp] < a[mp - 1]) {
+            start = mp + 1
+            mp = Math.floor((start + end) / 2)
+
+        } else if (mp === start || mp === end) return a[mp]
+
+    }
+}
+
+console.log(findMin([1, 2, 3, 4, 5, 6]))
+
+
 /*
 Find how many rectangles are possible
 */
 
+/*
+Find the average of student scores return the student with the heighest test score
 
+[[Rich,100], [John, 80], [Bob,90], [Bob, 87], [John, 75], [Rich, 90]]
+return Rich
+*/
+
+
+function findHeighestAverage(arr) {
+    let scores = {}
+    let max;
+    for (let s of arr) {
+        let name = s[0]
+        let grade = s[1]
+        if (!scores[name]) {
+            scores[name] = [grade, 1]
+        } else {
+            scores[name][0] = scores[name][0] + grade
+            scores[name][1]++
+        }
+    }
+    let temp = 0;
+
+    for (let name in scores) {
+        let average = scores[name][0] / scores[name][1]
+        if (temp < average) {
+            temp = average
+            max = name
+        }
+    }
+    console.log(max, scores)
+    return max;
+
+}
+
+findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]])
 
 
 
