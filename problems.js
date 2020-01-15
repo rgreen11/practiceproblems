@@ -877,5 +877,73 @@ function findHeighestAverage(arr) {
 findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]])
 
 
+// Given a string of chars return a string with its characters and its count
+
+// Example input: aaaabbbcc
+// Output: a4b3c2
+
+// Input: abacaa
+// Output: a1b1a1c1a2
 
 
+function helper(str) {
+
+    let string = str[0]
+    let count = 1;
+
+    for (let i = 1; i < str.length; i++) {
+        count++
+    }
+    return string += count.toString()
+}
+
+function count(s) {
+
+    let a = 0;
+    let b = '';
+    for (let i = 0; i < s.length; i++) {
+        if (s[a] === s[i]) {
+            b += s[a]
+        } else {
+            a = i
+            b += ','
+            b += s[a]
+        }
+    }
+
+    let arr = b.split(',');
+    let result = '';
+
+    for (let i = 0; i < arr.length; i++) {
+        result += helper(arr[i])
+    }
+
+    return result;
+
+}
+
+
+
+function count2(str) {
+    let output = '';
+    let pre = 0;
+    let count = 1;
+
+    for (let i = 1; i < str.length + 1; i++) {
+        let current = i;
+        if (str[pre] === str[current]) {
+            count++;
+        } else if (str[pre] !== str[current]) {
+            output += str[pre]
+            output += count.toString()
+            pre = current
+            count = 1
+
+        }
+
+
+    }
+    return output;
+}
+
+count2('aaaabbbcc')
