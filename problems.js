@@ -998,21 +998,31 @@ function maxWords(arr, word) {
 
 function maxWords2(arr, searchLetters) {
     let word = {};
-    for (let i = 0; i < arr.length; i++) {
-        if (!word[arr[i]]) {
-            word[arr[i]] = '';
+    for (let i = 0; i < searchLetters.length; i++) {
+        if (!word[searchLetters[i]]) {
+            word[searchLetters[i]] = true;
         }
     }
     let match = [];
 
-    for (let i = 0; i < searchLetters.length; i++) {
-        if (!arr[i].includes(letters[arr[i]])) {
+    for (let i = 0; i < arr.length; i++) {
+        let check = true;
+        for (let j = 0; j < arr[i].length; j++) {
+            if (!word[arr[i][j]]) {
+                check = false;
+                break;
+            }
+        }
 
+        if (check) {
+            match.push(arr[i])
         }
     }
 
-}
+    return match
 
+}
+// console.log(maxWords2(['car', 'dog', 'apple', 'pear', 'applepie', 'cat'], 'adecaptpeloig'))
 console.log('---------------------------------------------------')
 
 // Return Second Smallest
