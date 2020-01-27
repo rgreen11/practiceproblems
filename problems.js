@@ -521,9 +521,9 @@ function trapWater(arr) {
 
     return Math.abs(counter)
 }
-
-// console.log(trapWater([1, 2, 4, 7, 3, 2, 4]))
-
+console.log('----------------------------------------------------------')
+console.log(trapWater([1, 2, 4, 7, 3, 2, 4]))
+console.log('----------------------------------------------------------')
 
 
 /**
@@ -874,7 +874,7 @@ function findHeighestAverage(arr) {
 
 }
 
-findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]])
+// findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]])
 
 
 // Given a string of chars return a string with its characters and its count
@@ -946,4 +946,110 @@ function count2(str) {
     return output;
 }
 
-count2('aaaabbbcc')
+// count2('aaaabbbcc')
+
+/**
+ * create an array called match
+ * create an object to store the list of words and its sorted text
+ * { 'acr': car ...}
+ * loop over the object 
+ * word.indexOf(char)
+ * if true push into the matched array 
+ */
+
+console.log('-------------------------------------------------------------')
+
+function match(word, mixedWord) {
+    let str = ''
+
+    for (let i = 0; i < word.length; i++) {
+
+        for (let j = 0; j < mixedWord.length; j++) {
+
+            if (word[i] === mixedWord[j]) {
+                str += word[i]
+                break;
+            }
+        }
+    }
+
+    if (word === str) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
+
+function maxWords(arr, word) {
+    let words = [];
+    for (let i = 0; i < arr.length; i++) {
+
+        if (match(arr[i], word)) {
+            words.push(arr[i])
+        }
+    }
+    return words
+}
+
+// console.log(maxWords(['car', 'dog', 'apple', 'pear', 'applepie', 'cat'], 'adecaptpeloi'))
+
+
+function maxWords2(arr, searchLetters) {
+    let word = {};
+    for (let i = 0; i < arr.length; i++) {
+        if (!word[arr[i]]) {
+            word[arr[i]] = '';
+        }
+    }
+    let match = [];
+
+    for (let i = 0; i < searchLetters.length; i++) {
+        if (!arr[i].includes(letters[arr[i]])) {
+
+        }
+    }
+
+}
+
+console.log('---------------------------------------------------')
+
+// Return Second Smallest
+
+function secondSmallest(nums) {
+    let small = nums[0]
+    let ss = Infinity
+
+    for (let i = 1; i < nums.length; i++) {
+        let current = nums[i]
+
+        if (current < small) {
+            ss = small
+            small = current
+        }
+
+        if (current > small && current < ss) {
+            ss = current
+        }
+    }
+    return ss
+}
+
+console.log(secondSmallest([8, 4, 17, 9, 11]))
+
+
+//  In how many distinct ways can you climb to the top?
+
+var climbStairs = function (n) {
+
+    if (n < 4) return n;
+    let f = 1;
+    let s = 2
+    for (let i = 3; i <= n; i++) {
+        let third = f + s
+        f = s;
+        s = third;
+    }
+    return s
+};
