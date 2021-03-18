@@ -111,7 +111,7 @@ function findMostMoneySpent(orders, n) {
 
     for (let i = 0; i < orders.length; i++) {
         let order = orders[i]; // { userId: '123', amount: 150 }
-        const { userId, amount } = orders[i];
+        const { userId, amount } = order;
 
         if (!usersTotal[userId]) {
             usersTotal[userId] = amount
@@ -187,6 +187,8 @@ function replaceWord(word) {
 
     return stars
 }
+
+
 
 
 // function findBadWords(str) {
@@ -832,7 +834,7 @@ function findMin(a) {
     }
 }
 
-console.log(findMin([1, 2, 3, 4, 5, 6]))
+// console.log(findMin([1, 2, 3, 4, 5, 6]))
 
 
 /*
@@ -874,7 +876,7 @@ function findHeighestAverage(arr) {
 
 }
 
-// findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]])
+console.log(findHeighestAverage([['Rich', 100], ['John', 80], ['Bob', 90], ['Bob', 87], ['John', 75], ['Rich', 90], ['Bob', 90], ['Chelsea', 100], ['Chelsea', 105], ['Chelsea', 100]]))
 
 
 // Given a string of chars return a string with its characters and its count
@@ -1046,7 +1048,7 @@ function secondSmallest(nums) {
     return ss
 }
 
-console.log(secondSmallest([8, 4, 17, 9, 11]))
+// console.log(secondSmallest([8, 4, 17, 9, 11]))
 
 
 //  In how many distinct ways can you climb to the top?
@@ -1062,4 +1064,141 @@ var climbStairs = function (n) {
         s = third;
     }
     return s
+};
+
+
+// Finding the exchange rate
+
+const rates = [['usd', 'gbp', .8], ['gbp', 'can', .88], ['usd', 'yen', 1.21], ['yen', 'usd', .7], ['yen', 'gbp', .9], ['usd', 'can', .98], ['yen', 'can']]
+
+function exchangeRate(arr) {
+    let data = {};
+    let cur = {};
+    for (let i = 0; i < arr.length; i++) {
+        let temp = {};
+        let [input, output, rate] = arr[i];
+
+        if (rate) {
+            if (!data[input] && !cur[output]) {
+
+                temp[output] = rate;
+                cur = temp;
+                data[input] = cur;
+
+            } else if (data[input] && !cur[output]) {
+                temp = data[input];
+                temp[output] = rate;
+                cur = temp;
+                data[input] = cur;
+            }
+            cur = {};
+        } else {
+
+        }
+
+    }
+
+    return data;
+}
+
+// console.log(exchangeRate(rates))
+
+
+function ExchangeRateVal(arr) {
+    let values = [];
+    const obj = exchangeRate(rates);
+
+    for (let i = 0; i < arr.length; i++) {
+        const [input, output, rates] = arr[i];
+
+        if (obj[input][output]) {
+            values.push(obj[input][output])
+        }
+
+    }
+    console.log(values)
+}
+
+
+// ExchangeRateVal(rates)
+
+
+// let possibilities = [];
+// const minWaste = (vials, target) => {
+
+//     if (target <= 0) return target;
+//     for (let i = 0; i < vials.length; i++) {
+//         let possibility = minWaste(vials, target - vials[i])
+//         console.log(possibility)
+//         possibilities.push(possibility)
+//     }
+//     // console.log('before',possibilities)
+
+//     possibilities.sort((a, b) => b > a)
+
+//     // console.log('after',possibilities)
+//     return possibilities[0]
+// }
+
+// console.log(minWaste([100, 30], 182))
+
+
+const storage = [];
+
+const minWaste = (vals, target) => {
+
+    if (target <= 0) {
+
+        return target;
+    }
+
+    for (let i = 0; i < vals.length; i++) {
+
+        let result = minWaste(vals, target - vals[i])
+        storage.push(result)
+        // console.log(result)
+    }
+    storage.sort((a, b) => b > a)
+
+    return storage[1];
+
+}
+
+console.log(minWaste([100, 30], 182))
+
+
+/** Given a string S that only contains "I" (increase) or "D" (decrease), let N = S.length.
+
+Return any permutation A of [0, 1, ..., N] such that for all i = 0, ..., N-1:
+
+If S[i] == "I", then A[i] < A[i+1]
+If S[i] == "D", then A[i] > A[i+1]
+
+Input: "IDID"
+Output: [0,4,1,3,2]
+
+Input: "DDI"
+Output: [3,2,0,1]
+
+Input: "III"
+Output: [0,1,2,3]
+ */
+
+var diStringMatch = function (S) {
+
+    let N = S.length
+    let low = 0;
+    let high = N;
+
+    let output = []
+
+    for (let i = 0; i < N; i++) {
+        if (S[i] === 'I') {
+            output.push(low++)
+        } else if (S[i] === 'D') {
+            output.push(high--)
+        }
+    }
+    output.push(high)
+    return output
 };
